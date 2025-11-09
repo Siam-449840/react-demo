@@ -350,11 +350,11 @@ const TrustAWebsite = () => {
   return (
     <div className={`min-h-screen transition-colors duration-500 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 text-gray-900'}`}>
       {/* Header */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 backdrop-blur-xl ${
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled 
-          ? 'py-3 shadow-2xl bg-white/90 dark:bg-gray-900/90' 
+          ? `py-3 shadow-2xl ${darkMode ? 'bg-gray-900/90' : 'bg-white/90'}` 
           : 'py-5 bg-transparent'
-      }`}>
+      } backdrop-blur-xl`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -376,7 +376,7 @@ const TrustAWebsite = () => {
                 <a
                   key={key}
                   href={`#${key}`}
-                  className="relative font-semibold text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 group"
+                  className={`relative font-semibold transition-all duration-300 group ${darkMode ? 'text-gray-300 hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'}`}
                 >
                   {item}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-600 transition-all duration-300 group-hover:w-full rounded-full"></span>
@@ -390,7 +390,9 @@ const TrustAWebsite = () => {
               <div className="relative">
                 <button
                   onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl backdrop-blur-sm border transition-all duration-300 hover:shadow-lg ${
+                    darkMode ? 'bg-gray-800/80 border-gray-700' : 'bg-white/80 border-gray-200'
+                  }`}
                 >
                   <Globe className="w-5 h-5" />
                   <span className="font-semibold">{language === 'en' ? 'EN' : 'বাং'}</span>
@@ -398,13 +400,15 @@ const TrustAWebsite = () => {
                 </button>
                 
                 {langDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-40 rounded-2xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                  <div className={`absolute right-0 mt-2 w-40 rounded-2xl backdrop-blur-xl shadow-2xl border overflow-hidden ${
+                    darkMode ? 'bg-gray-800/90 border-gray-700' : 'bg-white/90 border-gray-200'
+                  }`}>
                     <button
                       onClick={() => { setLanguage('en'); setLangDropdownOpen(false); }}
                       className={`w-full px-4 py-3 text-left transition-all duration-300 ${
                         language === 'en' 
                           ? 'bg-blue-600 text-white' 
-                          : 'hover:bg-gray-100 dark:hover:bg-gray-700'
+                          : darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                       }`}
                     >
                       English
@@ -414,7 +418,7 @@ const TrustAWebsite = () => {
                       className={`w-full px-4 py-3 text-left transition-all duration-300 ${
                         language === 'bn' 
                           ? 'bg-blue-600 text-white' 
-                          : 'hover:bg-gray-100 dark:hover:bg-gray-700'
+                          : darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
                       }`}
                     >
                       বাংলা
@@ -426,7 +430,9 @@ const TrustAWebsite = () => {
               {/* Dark Mode Toggle */}
               <button
                 onClick={() => setDarkMode(!darkMode)}
-                className="p-3 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 hover:scale-110"
+                className={`p-3 rounded-xl backdrop-blur-sm border transition-all duration-300 hover:shadow-lg hover:scale-110 ${
+                  darkMode ? 'bg-gray-800/80 border-gray-700' : 'bg-white/80 border-gray-200'
+                }`}
               >
                 {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
@@ -445,7 +451,9 @@ const TrustAWebsite = () => {
               {/* Mobile Menu Toggle */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-3 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
+                className={`lg:hidden p-3 rounded-xl backdrop-blur-sm border transition-all duration-300 hover:shadow-lg ${
+                  darkMode ? 'bg-gray-800/80 border-gray-700' : 'bg-white/80 border-gray-200'
+                }`}
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -454,13 +462,17 @@ const TrustAWebsite = () => {
 
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
-            <div className="lg:hidden mt-4 py-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700 shadow-2xl">
+            <div className={`lg:hidden mt-4 py-4 backdrop-blur-xl rounded-2xl border shadow-2xl ${
+              darkMode ? 'bg-gray-800/90 border-gray-700' : 'bg-white/90 border-gray-200'
+            }`}>
               <nav className="flex flex-col space-y-4 px-4">
                 {Object.entries(t.nav).map(([key, item]) => (
                   <a
                     key={key}
                     href={`#${key}`}
-                    className="py-3 px-4 rounded-xl font-semibold text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 transition-all duration-300"
+                    className={`py-3 px-4 rounded-xl font-semibold transition-all duration-300 ${
+                      darkMode ? 'text-gray-300 hover:bg-gray-700 hover:text-blue-400' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'
+                    }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item}
@@ -489,19 +501,17 @@ const TrustAWebsite = () => {
         
         {/* Floating Elements */}
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white z-10">
-          <div className="animate-fade-in-up">
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black mb-8 leading-tight bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
-              {t.hero.title}
-            </h1>
-            <p className="text-xl sm:text-2xl lg:text-3xl mb-12 max-w-4xl mx-auto opacity-90 leading-relaxed">
-              {t.hero.subtitle}
-            </p>
-          </div>
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black mb-8 leading-tight bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent animate-fade-in-up">
+            {t.hero.title}
+          </h1>
+          <p className="text-xl sm:text-2xl lg:text-3xl mb-12 max-w-4xl mx-auto opacity-90 leading-relaxed animate-fade-in-up-delay">
+            {t.hero.subtitle}
+          </p>
           
-          <div className="animate-fade-in-up-delay flex flex-col sm:flex-row justify-center gap-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-6 animate-fade-in-up-delay">
             <button className="group relative px-8 py-4 bg-white text-blue-700 rounded-2xl font-bold text-lg hover:scale-105 hover:shadow-2xl transition-all duration-500 overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-white to-cyan-100 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
               <span className="relative z-10 flex items-center gap-3">
@@ -535,20 +545,26 @@ const TrustAWebsite = () => {
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="group relative p-8 rounded-3xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl shadow-2xl border border-gray-200 dark:border-gray-700 hover:scale-105 transition-all duration-500 cursor-pointer"
+                className={`group relative p-8 rounded-3xl backdrop-blur-xl shadow-2xl border hover:scale-105 transition-all duration-500 cursor-pointer ${
+                  darkMode ? 'bg-gray-800/90 border-gray-700' : 'bg-white/90 border-gray-200'
+                }`}
               >
                 <div className="relative z-10 text-center">
                   <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${stat.color} mb-6 group-hover:scale-110 transition-transform duration-500`}>
                     <stat.icon className="w-8 h-8 text-white" />
                   </div>
-                  <div className="text-4xl lg:text-5xl font-black bg-gradient-to-br from-gray-800 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-3">
+                  <div className={`text-4xl lg:text-5xl font-black mb-3 ${
+                    darkMode ? 'bg-gradient-to-br from-white to-gray-300' : 'bg-gradient-to-br from-gray-800 to-gray-600'
+                  } bg-clip-text text-transparent`}>
                     {stat.number}
                   </div>
                   <div className={`text-lg font-semibold ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                     {stat.label}
                   </div>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-gray-700 dark:to-gray-600 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                  darkMode ? 'bg-gradient-to-br from-gray-700 to-gray-600' : 'bg-gradient-to-br from-blue-50 to-cyan-50'
+                }`}></div>
               </div>
             ))}
           </div>
@@ -573,12 +589,14 @@ const TrustAWebsite = () => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-4 border border-gray-200 dark:border-gray-700"
+                className={`group relative rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-4 border ${
+                  darkMode ? 'bg-gray-800/80 border-gray-700' : 'bg-white/80 border-gray-200'
+                } backdrop-blur-xl`}
               >
                 {/* Animated Gradient Border */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
                 
-                <div className="relative bg-white dark:bg-gray-800 m-0.5 rounded-3xl overflow-hidden">
+                <div className={`relative m-0.5 rounded-3xl overflow-hidden ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
                   {/* Feature Icon */}
                   <div className={`bg-gradient-to-br ${feature.gradient} p-8 text-white relative overflow-hidden`}>
                     <div className="absolute inset-0 bg-white/10 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
@@ -587,7 +605,9 @@ const TrustAWebsite = () => {
 
                   {/* Feature Content */}
                   <div className="p-8">
-                    <h3 className="text-2xl font-black mb-4 text-gray-800 dark:text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-cyan-600 group-hover:bg-clip-text transition-all duration-500">
+                    <h3 className={`text-2xl font-black mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-cyan-600 group-hover:bg-clip-text transition-all duration-500 ${
+                      darkMode ? 'text-white' : 'text-gray-800'
+                    }`}>
                       {feature.title}
                     </h3>
                     <p className={`text-lg mb-6 leading-relaxed ${
@@ -618,8 +638,10 @@ const TrustAWebsite = () => {
       {/* TrustCode Section */}
       <section id="trustcode" className="py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         {/* Background Pattern */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-100 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        <div className={`absolute inset-0 ${
+          darkMode ? 'bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800' : 'bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-100'
+        }`}>
+          <div className="absolute inset-0 opacity-5" style={{backgroundImage: "url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"}}></div>
         </div>
 
         <div className="max-w-7xl mx-auto relative">
@@ -629,22 +651,28 @@ const TrustAWebsite = () => {
               <div className="relative group">
                 {/* Floating Animation Container */}
                 <div className="animate-float">
-                  <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-2xl border-4 border-blue-500 max-w-sm w-full transform group-hover:scale-105 transition-transform duration-500 relative overflow-hidden">
+                  <div className={`rounded-3xl p-8 shadow-2xl border-4 border-blue-500 max-w-sm w-full transform group-hover:scale-105 transition-transform duration-500 relative overflow-hidden ${
+                    darkMode ? 'bg-gray-800' : 'bg-white'
+                  }`}>
                     {/* Shine Effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                     
-                    <h3 className="text-2xl font-black text-center mb-8 text-gray-800 dark:text-white">
+                    <h3 className={`text-2xl font-black text-center mb-8 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
                       {t.trustcodeSection.verify}
                     </h3>
                     
                     {/* QR Code Container */}
-                    <div className="bg-gray-100 dark:bg-gray-700 w-48 h-48 mx-auto rounded-2xl flex items-center justify-center mb-8 relative overflow-hidden">
-                      <QrCode className="w-32 h-32 text-blue-600 dark:text-blue-400" />
+                    <div className={`w-48 h-48 mx-auto rounded-2xl flex items-center justify-center mb-8 relative overflow-hidden ${
+                      darkMode ? 'bg-gray-700' : 'bg-gray-100'
+                    }`}>
+                      <QrCode className={`w-32 h-32 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`} />
                       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10"></div>
                     </div>
                     
                     {/* Numeric Code */}
-                    <div className="bg-gray-100 dark:bg-gray-700 px-6 py-4 rounded-2xl text-center font-mono text-2xl font-black tracking-widest text-blue-600 dark:text-blue-400 mb-8 relative overflow-hidden border-2 border-gray-200 dark:border-gray-600">
+                    <div className={`px-6 py-4 rounded-2xl text-center font-mono text-2xl font-black tracking-widest mb-8 relative overflow-hidden border-2 ${
+                      darkMode ? 'bg-gray-700 text-blue-400 border-gray-600' : 'bg-gray-100 text-blue-600 border-gray-200'
+                    }`}>
                       {trustCode}
                       <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-600 to-cyan-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
                     </div>
@@ -679,12 +707,14 @@ const TrustAWebsite = () => {
                 {securityFeatures.map((item, index) => (
                   <div
                     key={index}
-                    className="group flex items-center gap-4 p-6 rounded-2xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-200 dark:border-gray-700"
+                    className={`group flex items-center gap-4 p-6 rounded-2xl backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border ${
+                      darkMode ? 'bg-gray-800/80 border-gray-700' : 'bg-white/80 border-gray-200'
+                    }`}
                   >
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
                       <item.icon className="w-6 h-6" />
                     </div>
-                    <span className="text-lg font-semibold text-gray-800 dark:text-white">
+                    <span className={`text-lg font-semibold ${darkMode ? 'text-white' : 'text-gray-800'}`}>
                       {item.text}
                     </span>
                   </div>
@@ -726,11 +756,15 @@ const TrustAWebsite = () => {
 
                 {/* Step Content */}
                 <div className="flex-1 group">
-                  <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl p-8 shadow-2xl group-hover:shadow-3xl group-hover:-translate-y-2 transition-all duration-500 border border-gray-200 dark:border-gray-700 relative overflow-hidden">
+                  <div className={`backdrop-blur-xl rounded-3xl p-8 shadow-2xl group-hover:shadow-3xl group-hover:-translate-y-2 transition-all duration-500 border relative overflow-hidden ${
+                    darkMode ? 'bg-gray-800/80 border-gray-700' : 'bg-white/80 border-gray-200'
+                  }`}>
                     {/* Hover Gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-gray-700 dark:to-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                      darkMode ? 'bg-gradient-to-br from-gray-700 to-gray-600' : 'bg-gradient-to-br from-blue-50 to-cyan-50'
+                    }`}></div>
                     
-                    <h3 className="text-2xl font-black mb-4 text-gray-800 dark:text-white relative z-10">
+                    <h3 className={`text-2xl font-black mb-4 relative z-10 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
                       {step.title}
                     </h3>
                     <p className={`text-lg leading-relaxed relative z-10 ${
@@ -749,8 +783,10 @@ const TrustAWebsite = () => {
       {/* Marketplace Section */}
       <section id="marketplace" className="py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/always-grey.png')] opacity-5"></div>
+        <div className={`absolute inset-0 ${
+          darkMode ? 'bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800' : 'bg-gradient-to-br from-gray-50 via-blue-50 to-cyan-50'
+        }`}>
+          <div className="absolute inset-0 opacity-5" style={{backgroundImage: "url('data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E')"}}></div>
         </div>
 
         <div className="max-w-7xl mx-auto relative">
@@ -781,7 +817,9 @@ const TrustAWebsite = () => {
             {products.map((product, index) => (
               <div
                 key={index}
-                className="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-4 border border-gray-200 dark:border-gray-700"
+                className={`group backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-4 border ${
+                  darkMode ? 'bg-gray-800/80 border-gray-700' : 'bg-white/80 border-gray-200'
+                }`}
               >
                 {/* Product Image */}
                 <div 
@@ -798,10 +836,10 @@ const TrustAWebsite = () => {
 
                 {/* Product Info */}
                 <div className="p-6">
-                  <h3 className="text-xl font-black mb-3 text-gray-800 dark:text-white line-clamp-2">
+                  <h3 className={`text-xl font-black mb-3 line-clamp-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
                     {product.name}
                   </h3>
-                  <div className="text-2xl font-black text-blue-600 dark:text-blue-400 mb-4">
+                  <div className={`text-2xl font-black mb-4 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>
                     {product.price}
                   </div>
                   
@@ -814,7 +852,7 @@ const TrustAWebsite = () => {
                           className={`w-5 h-5 ${
                             starIndex < Math.floor(product.rating)
                               ? 'text-yellow-400 fill-current'
-                              : 'text-gray-300 dark:text-gray-600'
+                              : darkMode ? 'text-gray-600' : 'text-gray-300'
                           }`}
                         />
                       ))}
@@ -828,7 +866,9 @@ const TrustAWebsite = () => {
 
                   {/* Actions */}
                   <div className="flex items-center justify-between">
-                    <button className="p-3 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 transition-all duration-300 hover:scale-110">
+                    <button className={`p-3 rounded-xl transition-all duration-300 hover:scale-110 ${
+                      darkMode ? 'bg-gray-700 text-gray-400 hover:bg-red-900/20 hover:text-red-500' : 'bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-500'
+                    }`}>
                       <Heart className="w-5 h-5" />
                     </button>
                     <button className="flex items-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
@@ -852,7 +892,7 @@ const TrustAWebsite = () => {
         
         {/* Animated Elements */}
         <div className="absolute top-0 left-0 w-72 h-72 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
         
         <div className="relative max-w-4xl mx-auto text-center text-white z-10">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-8">
@@ -882,9 +922,11 @@ const TrustAWebsite = () => {
       </section>
 
       {/* Footer */}
-      <footer className={`${darkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-900'} text-white py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden`}>
+      <footer className={`text-white py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden ${
+        darkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-900'
+      }`}>
         {/* Background Pattern */}
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-10"></div>
+        <div className="absolute inset-0 opacity-10" style={{backgroundImage: "url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"}}></div>
         
         <div className="max-w-7xl mx-auto relative">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
@@ -998,7 +1040,7 @@ const TrustAWebsite = () => {
       </footer>
 
       {/* Custom Styles */}
-      <style jsx>{`
+      <style>{`
         @keyframes fade-in-up {
           from {
             opacity: 0;
